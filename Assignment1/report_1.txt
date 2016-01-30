@@ -1,0 +1,21 @@
+--Assignment1 - Part3 --
+
+1) What is orphan and zombie process?
+
+*When the parent process terminates before the child process, it becomes an orphan process.
+
+* When the parent process does not read the exit status of the child process after it terminates, it becomes a zombie process.
+
+
+
+2)What are the changes that occur when the child process calls the exec system call to execute a new program?
+
+When the child process calls the exec system call, the entire text,data and stack segment of the process is replaced by the running program.
+(Web reference: http://www.cs.uregina.ca/Links/class-info/330/Fork/fork.html)
+
+3)Write the contribution of each team member.
+
+My team member, Kedar and I met twice in the campus to work on this assignment. In the first meeting, we worked on setting environment right as we faced some issues with the driver installation. In our second meeting, we both referred to the assignment description and completed the part 1, discussed the concepts and completed the part 3 of the assignment. For part two, we both looked for documentation for using the pipe() in our program, discussed how the program flow should be and implemented it.
+
+It suffices to say that we both contributed equally in the assignment.
+
