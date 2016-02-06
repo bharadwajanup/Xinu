@@ -4,13 +4,13 @@
 
 *When the parent process terminates before the child process, it becomes an orphan process.
 
-* When the parent process has not read the exit status of the child process after chile process terminates , it becomes a zombie process.
+* When the parent process has not read the exit status of the child process after child process terminates , it becomes a zombie process.
 
 
 
 2)What are the changes that occur when the child process calls the exec system call to execute a new program?
 
-When the child process calls the exec system call, the entire text,data and stack segment of the process is replaced by the running program.
+When the child process calls the exec system call, the entire text,data and stack segment of the child process is replaced by a new program.
 (Web reference: http://www.cs.uregina.ca/Links/class-info/330/Fork/fork.html)
 
 3)Write the contribution of each team member.
