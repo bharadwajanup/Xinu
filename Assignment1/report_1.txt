@@ -4,7 +4,7 @@
 
 *When the parent process terminates before the child process, it becomes an orphan process.
 
-* When the parent process does not read the exit status of the child process after it terminates, it becomes a zombie process.
+* When the parent process has not read the exit status of the child process after chile process terminates , it becomes a zombie process.
 
 
 
