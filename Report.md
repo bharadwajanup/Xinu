@@ -125,11 +125,14 @@ Observation: As processes schedule is controller entirely by operating systems a
 The program hangs as the processes are waiting to consume the value produced by predecessor process. But as the 'master' value is not updated, the processes can never access their mail box. When program hangs it is usually known as deadlock.
 
 2)Why does your program go into an infinite loop? What is the name of this behavior?
-Program goes to infinite loop due to improper synchronization among the processes. Due to this unbounded context switching happens and processes never exit.
+
+Program goes to infinite loop due to improper synchronization among the processes. Due to improper process synchronization, processes never meet the exit condition, hence the processes never exit. This causes unbounded context switching.
 
 3)Why does your program print numbers out of order? What is the name of this behavior?
+
 All processes are trying to access the common resource, the 'mailbox array'. As multiple processes are trying accesses at same time and trying to change mail box value and print them, the print is out of order. This condition is known as race condition.
 
 4)What property of Xinu allows the working version of your program to print values in the correct order?
+
 We implemented busy waiting in order to print the values in correct order. In busy waiting, process will print and decrement the value only if it is its turn else it will wait until its chance arrives.
 
