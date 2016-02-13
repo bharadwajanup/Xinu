@@ -37,22 +37,22 @@ process_ring 4 O
 
 OUTPUT:
 
-Round: 0, Process: 0, Value 16
-Round: 1, Process: 0, Value 16
-Round: 2, Process: 0, Value 16
-Round: 3, Process: 0, Value 16
-Round: 0, Process: 1, Value 15
-Round: 1, Process: 1, Value 15
-Round: 2, Process: 1, Value 15
-Round: 3, Process: 1, Value 15
-Round: 0, Process: 2, Value 14
-Round: 1, Process: 2, Value 14
-Round: 2Round: 0, Process: 3, Value 13
-Round: 1, Proce,xsh $ ss: 3, Value 13
-Round: 2, Process: 3, Va lue 13
-Round: 3, Process: 3, Value 13
-Process: 2, Value 14
-Round: 3, Process: 2, Value 14
+Round: 0, Process: 0, Value 16 
+Round: 1, Process: 0, Value 16  
+Round: 2, Process: 0, Value 16  
+Round: 3, Process: 0, Value 16  
+Round: 0, Process: 1, Value 15  
+Round: 1, Process: 1, Value 15  
+Round: 2, Process: 1, Value 15  
+Round: 3, Process: 1, Value 15  
+Round: 0, Process: 2, Value 14  
+Round: 1, Process: 2, Value 14  
+Round: 2Round: 0, Process: 3, Value 13  
+Round: 1, Proce,xsh $ ss: 3, Value 13  
+Round: 2, Process: 3, Va lue 13  
+Round: 3, Process: 3, Value 13  
+Process: 2, Value 14  
+Round: 3, Process: 2, Value 14  
 
 
 2)Correct order output:
@@ -66,22 +66,22 @@ process_ring
 
 OUTPUT:
 
-Round: 0, Process: 0, Value 16
-Round: 0, Process: 1, Value 15
-Round: 0, Process: 2, Value 14
-Round: 0, Process: 3, Value 13
-xsh $ Round: 1, Process: 0, Value 12
-Round: 1, Process: 1, Value 11
-Round: 1, Process: 2, Value 10
-Round: 1, Process: 3, Value 9
-Round: 2, Process: 0, Value 8
-Round: 2, Process: 1, Value 7
-Round: 2, Process: 2, Value 6
-Round: 2, Process: 3, Value 5
-Round: 3, Process: 0, Value 4
-Round: 3, Process: 1, Value 3
-Round: 3, Process: 2, Value 2
-Round: 3, Process: 3, Value 1
+Round: 0, Process: 0, Value 16  
+Round: 0, Process: 1, Value 15  
+Round: 0, Process: 2, Value 14  
+Round: 0, Process: 3, Value 13  
+xsh $ Round: 1, Process: 0, Value 12  
+Round: 1, Process: 1, Value 11  
+Round: 1, Process: 2, Value 10  
+Round: 1, Process: 3, Value 9  
+Round: 2, Process: 0, Value 8  
+Round: 2, Process: 1, Value 7  
+Round: 2, Process: 2, Value 6  
+Round: 2, Process: 3, Value 5  
+Round: 3, Process: 0, Value 4  
+Round: 3, Process: 1, Value 3  
+Round: 3, Process: 2, Value 2  
+Round: 3, Process: 3, Value 1  
 
 
 3) Hang while execution:
@@ -95,10 +95,10 @@ process_ring 4 H
 
 OUTPUT:
 
-Round: 0, Process: 0, Value 16
-Round: 1, Process: 0, Value 16
-Round: 2, Process: 0, Value 16
-Round: 3, Process: 0, Value 16
+Round: 0, Process: 0, Value 16  
+Round: 1, Process: 0, Value 16  
+Round: 2, Process: 0, Value 16  
+Round: 3, Process: 0, Value 16  
 
 
 4) Infinite loop:
@@ -107,12 +107,12 @@ The processes enter an infinite loop when the exit condition is never achieved. 
 
 INPUT:
 
-process_ring 4 I
+process_ring 4 I  
 
 OUTPUT:
 
 
-**Program runs indefinitely **
+**Program runs indefinitely **  
 
 
 Observation: As processes schedule is controller entirely by operating systems and cannot be repdecited by end users, sometimes, the processes were behaving in erratic way. We understand due to this erratic nature of processes, we need process synchronization.
