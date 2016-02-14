@@ -136,3 +136,6 @@ All processes are trying to access the common resource, the 'mailbox array'. As 
 
 We implemented busy waiting in order to print the values in correct order. In busy waiting, process will print and decrement the value only if it is its turn else it will wait until its chance arrives.
 
+**Contribution**
+Anup and me have contributed for all part of the assignment equally.
+
