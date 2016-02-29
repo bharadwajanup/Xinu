@@ -74,3 +74,6 @@ extern	shellcmd  xsh_uptime	(int32, char *[]);
 extern	shellcmd  xsh_help	(int32, char *[]);
 
 extern shellcmd xsh_process_ring(int32, char**);
+
+/* in file xsh_babybird.c */
+extern shellcmd xsh_babybird(int32, char**);
