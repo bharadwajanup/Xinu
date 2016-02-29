@@ -3,6 +3,7 @@
 
 volatile int test_lock = 0, test_unlock = 0;
 volatile int cond_lock = 0, cond_unlock = 0;
+//volatile int wait_process_pid;
 int test_and_set(volatile int*);
 
 syscall mutex_create(mutex_t *lock){
@@ -50,7 +51,7 @@ syscall cond_wait(cond_t *cv, mutex_t *lock)
 	mutex_unlock(lock);
 	while(test_and_set(&cond_lock)==1)  
 		;
-	
+	/*
 	//Critical section begins
 	while(cv->value<=0){
 		// /kprintf("STUCK\n");
@@ -58,15 +59,22 @@ syscall cond_wait(cond_t *cv, mutex_t *lock)
 	//mutex_lock(lock);
 	cv->value=0;
 	cond_lock = 0;
+*/
+
+//Alternate implementation for conditional variables...
+
+	cv->value = getpid();
+	suspend(getpid());
+	cond_lock = 0;
 	return 0;
 }
 
 syscall cond_signal(cond_t *cv)
 {
-	// while(test_and_set(&test_unlock)==1)  
-	// 	;
-	cv->value=1;
-	//cond_lock = 0;
+//	cv->value=1;
+	
+	resume(cv->value);
+	cv->value = 0;
 	return 0;
 }
 

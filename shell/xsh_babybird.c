@@ -21,7 +21,7 @@ shellcmd xsh_babybird(int nargs, char *args[])
 	num_fetch_worms = atoi(args[3]);
 
 	if(num_fetch_worms==0 || num_baby_birds==0 || num_fetch_worms==0){
-		printf("invalid input\n");
+		printf("Invalid input\n");
 		exit(1);
 	}
 	mutex_create(&mut_lock);
@@ -63,18 +63,18 @@ void childbird(int num_worms_local, int id){
 		}
 		else{
 			if(worms_in_dish==0){
-				kprintf("DISH is empty by %d\n",id);
+				kprintf("Bowl is empty...\n");
 				dish_empty=1;
 				cond_wait(&cv, &mut_lock);
 			}
 			else{
 				num_worms_local--;
 				worms_in_dish--;
-				kprintf("baby bird %d ate 1 worm. Left %d\t Worms in Dish %d\t Dish empty %d\n",id,num_worms_local, worms_in_dish,dish_empty);
+				kprintf("Baby bird %d ate 1 worm. There are now %d more worms to be eaten.\n",id, num_worms_local);
 				//kprintf("Baby ID %d released the lock\n",id);
 				mutex_unlock(&mut_lock);
 			}
 		}
 	}
-	kprintf("Child exited %d\n",id);
+	kprintf("Baby bird %d exits with %d worms left in the bowl.\n",id, worms_in_dish);
 }
