@@ -3,7 +3,7 @@
 #include <babybird.h>
 
 volatile mutex_t  mut_lock;
-volatile cond_t cv;
+volatile cond_t cv, cv_parent;
 volatile int num_eat_worms = 0, num_baby_birds = 0, num_fetch_worms = 0;
 volatile int worms_in_dish = 0;
 volatile int dish_empty = 0;
@@ -26,6 +26,7 @@ shellcmd xsh_babybird(int nargs, char *args[])
 	}
 	mutex_create(&mut_lock);
 	cond_init(&cv);
+	cond_init(&cv_parent);
 
 	resume(create(parentbird, 1024, 20, "parent bird",0));
 	for(i=0;i<num_baby_birds;i++){
@@ -39,17 +40,19 @@ void parentbird(){
 
 	while(1==1){
 		//kprintf("parent came in\n");
+		cond_wait(&cv_parent,&mut_lock);
 		mutex_lock(&mut_lock);
-		if(dish_empty==1){
+		//if(dish_empty==1){
 			//kprintf("parent came in %d\n",mut_lock.value);
+			
 			
 			worms_in_dish = num_fetch_worms;
 			kprintf("Parent filled dish with %d worms\n",worms_in_dish);
 			dish_empty = 0;
 			cond_signal(&cv);
 			//mutex_unlock(&mut_lock);
-		}
-		mutex_unlock(&mut_lock);
+		//}
+		//mutex_unlock(&mut_lock);
 	}
 }
 
@@ -65,6 +68,7 @@ void childbird(int num_worms_local, int id){
 			if(worms_in_dish==0){
 				kprintf("Bowl is empty...\n");
 				dish_empty=1;
+				cond_signal(&cv_parent);
 				cond_wait(&cv, &mut_lock);
 			}
 			else{

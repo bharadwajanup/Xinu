@@ -8,6 +8,7 @@ int test_and_set(volatile int*);
 
 syscall mutex_create(mutex_t *lock){
 	lock->value = 1;
+	lock->test_and_set_lock = 0;
 	return 0;
 }
 /**
@@ -15,7 +16,7 @@ syscall mutex_create(mutex_t *lock){
 * if <0
 **/
 syscall mutex_lock(mutex_t *lock){	
-	while(test_and_set(&test_lock)==1)
+	while(test_and_set(&lock->test_and_set_lock)==1)
 		;
 	//kprintf("Entered Critical section\t lock value %d\t address %x",lock->value, lock);
 	//Critical section begins
@@ -36,20 +37,21 @@ syscall mutex_unlock(mutex_t *lock)
 	lock->value=1;
 	//kprintf("UNLOCKED\t lock value %d\n",lock->value);
 	//lock->test_and_set_lock = 0;
-	test_lock = 0;
+	lock->test_and_set_lock = 0;
 	return 0;
 }
 
 syscall cond_init(cond_t *cv)
 {
 	cv->value = 0;
+	cv->test_and_set_lock = 0;
 	return 0;
 }
 
 syscall cond_wait(cond_t *cv, mutex_t *lock)
 {
 	mutex_unlock(lock);
-	while(test_and_set(&cond_lock)==1)  
+	while(test_and_set(&cv->test_and_set_lock)==1)  
 		;
 	/*
 	//Critical section begins
@@ -65,15 +67,18 @@ syscall cond_wait(cond_t *cv, mutex_t *lock)
 
 	cv->value = getpid();
 	suspend(getpid());
-	cond_lock = 0;
+	cv->test_and_set_lock = 0;
 	return 0;
 }
 
 syscall cond_signal(cond_t *cv)
 {
 //	cv->value=1;
-	
+	while(cv->value == 0)
+		;
 	resume(cv->value);
+
+	//kprintf("%d has been resumed\n",cv->value);
 	cv->value = 0;
 	return 0;
 }
