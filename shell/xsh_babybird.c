@@ -39,20 +39,16 @@ void parentbird(){
 	//kprintf("Parent process\n");
 
 	while(1==1){
-		//kprintf("parent came in\n");
-		cond_wait(&cv_parent,&mut_lock);
 		mutex_lock(&mut_lock);
-		//if(dish_empty==1){
-			//kprintf("parent came in %d\n",mut_lock.value);
-			
-			
+	  if(dish_empty==0)
+		cond_wait(&cv_parent,&mut_lock);
+		else{
 			worms_in_dish = num_fetch_worms;
 			kprintf("Parent filled dish with %d worms\n",worms_in_dish);
 			dish_empty = 0;
 			cond_signal(&cv);
-			//mutex_unlock(&mut_lock);
-		//}
-		//mutex_unlock(&mut_lock);
+			mutex_unlock(&mut_lock);
+		}
 	}
 }
 

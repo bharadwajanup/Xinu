@@ -18,6 +18,7 @@ syscall mutex_create(mutex_t *lock){
 syscall mutex_lock(mutex_t *lock){	
 	while(test_and_set(&lock->test_and_set_lock)==1)
 		;
+		
 	//kprintf("Entered Critical section\t lock value %d\t address %x",lock->value, lock);
 	//Critical section begins
 	while(lock->value<=0)
@@ -43,7 +44,7 @@ syscall mutex_unlock(mutex_t *lock)
 
 syscall cond_init(cond_t *cv)
 {
-	cv->value = 0;
+	cv->value = -1;
 	cv->test_and_set_lock = 0;
 	return 0;
 }
@@ -66,7 +67,7 @@ syscall cond_wait(cond_t *cv, mutex_t *lock)
 //Alternate implementation for conditional variables...
 
 	cv->value = getpid();
-	suspend(getpid());
+	suspend(cv->value);
 	cv->test_and_set_lock = 0;
 	return 0;
 }
@@ -74,12 +75,10 @@ syscall cond_wait(cond_t *cv, mutex_t *lock)
 syscall cond_signal(cond_t *cv)
 {
 //	cv->value=1;
-	while(cv->value == 0)
-		;
 	resume(cv->value);
 
 	//kprintf("%d has been resumed\n",cv->value);
-	cv->value = 0;
+	cv->value = -1;
 	return 0;
 }
 
