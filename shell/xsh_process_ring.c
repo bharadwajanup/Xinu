@@ -1,4 +1,4 @@
-#include <xinu.h>
+/*#include <xinu.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -37,3 +37,4 @@ void ring_element(int32 id) {
 		printf("Ring element %d -- Value %d\n", id, count--);
 	}
 }
+*/

@@ -24,6 +24,7 @@ shellcmd xsh_babybird(int nargs, char *args[])
 		printf("Invalid input\n");
 		exit(1);
 	}
+	//worms_in_dish = num_fetch_worms;
 	mutex_create(&mut_lock);
 	cond_init(&cv);
 	cond_init(&cv_parent);
@@ -42,13 +43,13 @@ void parentbird(){
 		mutex_lock(&mut_lock);
 	  if(dish_empty==0)
 		cond_wait(&cv_parent,&mut_lock);
-		else{
+		//else{
 			worms_in_dish = num_fetch_worms;
 			kprintf("Parent filled dish with %d worms\n",worms_in_dish);
 			dish_empty = 0;
 			cond_signal(&cv);
 			mutex_unlock(&mut_lock);
-		}
+		//}
 	}
 }
 
@@ -58,23 +59,27 @@ void childbird(int num_worms_local, int id){
 	{
 		mutex_lock(&mut_lock);
 		if(dish_empty==1){
-			mutex_unlock(&mut_lock);
+			cond_wait(&cv,&mut_lock);
 		}
-		else{
+		//else{
 			if(worms_in_dish==0){
 				kprintf("Bowl is empty...\n");
 				dish_empty=1;
 				cond_signal(&cv_parent);
 				cond_wait(&cv, &mut_lock);
 			}
-			else{
+			//else{
+			if(worms_in_dish>0){
 				num_worms_local--;
 				worms_in_dish--;
 				kprintf("Baby bird %d ate 1 worm. There are now %d more worms to be eaten.\n",id, num_worms_local);
 				//kprintf("Baby ID %d released the lock\n",id);
-				mutex_unlock(&mut_lock);
+				if(num_worms_local == 0)
+					kprintf("Baby bird %d exits with %d worms left in the bowl.\n",id, worms_in_dish);
 			}
-		}
+				mutex_unlock(&mut_lock);
+			//}
+		//}
 	}
-	kprintf("Baby bird %d exits with %d worms left in the bowl.\n",id, worms_in_dish);
+	
 }
