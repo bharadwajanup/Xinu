@@ -26,6 +26,8 @@ Any thread calling the wait function would release its mutex lock, enqueue its p
 
 A naive implementation where the threads busy wait until a condition is met.
 
+##Observation:
+Resume and suspend method solves starvation(as the suspend and resume of preocesses are done in FIFO fashion) and is more efficient busy wait method.
 
 ##Program Flow:
 
