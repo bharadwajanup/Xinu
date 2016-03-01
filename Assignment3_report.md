@@ -34,7 +34,7 @@ The parent waits for a signal from a child process and fills the bowl with the s
 
 ##Solutions to questions:
 
-1) Starvation is a condition where a process execution is postponed indefinitely waiting for some resource to be allocated but that never happens.Thus, the process never gets a turn to execute.
+1) Starvation is a condition where a process or thread is denied access to the necessary resources to completes its execution.
 
 No. The given protocol is not starvation free. There could be a condition where one process sets busy as true but cannot come out as "me" will not be equal to "turn" since other processes canmodify the value from the inner while loop.
 
@@ -46,6 +46,9 @@ No. The given protocol is not starvation free. There could be a condition where 
 
 Yes. With this protocol, deadlock is unlikely to happen as the processes can starve but will not satisfy all the conditions required for a deadlock...
 
+##Contribution##
+
+Both us have equally contributed for all parts of this assignment.
 
 
 
