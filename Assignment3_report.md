@@ -44,7 +44,7 @@ No. The given protocol is not starvation free. There could be a condition where 
 3)No preemption
 4)Circular wait.
 
-With this protocol, deadlock is unlikely to happen as the processes can starve but will not satisfy all the conditions required for a deadlock...
+Yes. With this protocol, deadlock is unlikely to happen as the processes can starve but will not satisfy all the conditions required for a deadlock...
 
 
 
