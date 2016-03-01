@@ -38,7 +38,13 @@ The parent waits for a signal from a child process and fills the bowl with the s
 
 No. The given protocol is not starvation free. There could be a condition where one process sets busy as true but cannot come out as "me" will not be equal to "turn" since other processes canmodify the value from the inner while loop.
 
-2) Deadlock is a condition where each process is waiting for an event which an other waiting process can cause thus resulting in a situation where no process can cause an event the other one is waiting for.
+2) Deadlock is a condition where each process is waiting for an event which an other waiting process can cause thus resulting in a situation where no process can cause an event the other one is waiting for. Deadlock can occur with the following conditions:
+1)Mutual Exclusion
+2)Hold and wait
+3)No preemption
+4)Circular wait.
+
+With this protocol, deadlock is unlikely to happen as the processes can starve but will not satisfy all the conditions required for a deadlock...
 
 
 
