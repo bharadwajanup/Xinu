@@ -4,6 +4,7 @@
 
 #include <xinu.h>
 #include <string.h>
+#include <shm.h>
 
 extern	void	start(void);	/* Start of Xinu code			*/
 extern	void	*_end;		/* End of Xinu code			*/
@@ -20,6 +21,7 @@ extern	void meminit(void);	/* Initializes the free memory list	*/
 struct	procent	proctab[NPROC];	/* Process table			*/
 struct	sentry	semtab[NSEM];	/* Semaphore table			*/
 struct	memblk	memlist;	/* List of free memory blocks		*/
+struct  shment  shmtab[NSHMENT];
 
 /* Active system status */
 

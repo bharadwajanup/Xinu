@@ -77,3 +77,11 @@ extern shellcmd xsh_process_ring(int32, char**);
 
 /* in file xsh_babybird.c */
 extern shellcmd xsh_babybird(int32, char**);
+
+/* in file xsh_reset.c */
+extern shellcmd xsh_reset(int32, char**);
+
+
+/* in file xsh_shmdemo.c */
+extern shellcmd xsh_shmdemo(int32, char**);
+
