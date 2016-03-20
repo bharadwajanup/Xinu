@@ -1,0 +1,3 @@
+#assignment4
+##part 1:
+The parent process forks two processes. The writer processes intially uses shmget function to create a new shared memory with size depending on the string passed by the user in command line. It gets the shared memory address by calling shmat(). The writer process attaches to the shared which increments the refcount by 1. The writer process writes to the shared memory and signals to reader process. The reader process uses shmget() to get shmid and shmat() to get shared memory address. The reader process reads from shared memory, prints to screen, detaches from shared memory and signals to the writer process so that it can unlink from shared memory. When reference count is 0, the shared memory is released and shmtab entry will be cleaned up.
