@@ -85,3 +85,6 @@ extern shellcmd xsh_reset(int32, char**);
 /* in file xsh_shmdemo.c */
 extern shellcmd xsh_shmdemo(int32, char**);
 
+/* in file xsh_prodcons.c */
+extern shellcmd xsh_prodcons(int32, char**);
+
