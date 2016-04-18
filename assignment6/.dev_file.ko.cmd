@@ -1,0 +1,1 @@
+cmd_/home/soic-os/assignment6/dev_file.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/soic-os/assignment6/dev_file.ko /home/soic-os/assignment6/dev_file.o /home/soic-os/assignment6/dev_file.mod.o
