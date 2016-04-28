@@ -36,7 +36,7 @@ Total number of disk blocks occupied by index blocks =
 (k/(16 * 7)) + (summation) i=1 to i=k (p(i)/(16 * 7)) = n - (summation) i=1 to i=k p(i)
 
 
-Credits: The solution to task 2 was discussed with Raghavendra.
+Credits: The solution to task 2 was discussed with Raghavendra and Chris on his AI office hours.
 
 
 
