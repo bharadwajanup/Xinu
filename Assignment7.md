@@ -19,4 +19,26 @@ Therefore, total number of disk blocks occupied by file pointers in the disk = (
 
 Each index block can have 16 data block pointers and seven such index blocks add up to one disk block. Therefore total number of disk blocks occupied by index blocks is: (summation) i=1 to i=k : (p(i)/16*7).
 
+ where p(i) is the number of data blocks occupied by the ith file.
+
+Now, total number of disk blocks 'n' can be written as an equation:
+
+
+(k/(16 * 7)) + (summation) i=1 to i=k (p(i)/(16 * 7)) + (summation) i=1 to i=k p(i) = n
+
+
+
+
+Therefore,
+
+Total number of disk blocks occupied by index blocks = 
+
+(k/(16 * 7)) + (summation) i=1 to i=k (p(i)/(16 * 7)) = n - (summation) i=1 to i=k p(i)
+
+
+
+
+
+
+
 
