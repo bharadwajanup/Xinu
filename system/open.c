@@ -31,7 +31,7 @@ syscall	open(
 		restore(mask);
 		return SYSERR;
 	}
-	prptr->prdesc[prptr->prdesc_count++] = devptr; //Add the device to the process descriptor table.
+	prptr->prdesc[prptr->prdesc_count++] = descrp; //Add the device to the process descriptor table.
 	retval = (*devptr->dvopen) (devptr, name, mode);
 	restore(mask);
 	return retval;

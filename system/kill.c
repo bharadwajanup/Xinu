@@ -12,10 +12,10 @@ syscall	kill(
 {
 	intmask	mask;			/* Saved interrupt mask		*/
 	struct	procent *prptr;		/* Ptr to process' table entry	*/
-	int32	i;			/* Index into descriptors	*/
+	int32	i, temp_descriptor_count;			/* Index into descriptors	*/
+
 
 	mask = disable();
-	kprintf("Kill called!\n");
 	if (isbadpid(pid) || (pid == NULLPROC)
 	    || ((prptr = &proctab[pid])->prstate) == PR_FREE) {
 		restore(mask);
@@ -27,10 +27,11 @@ syscall	kill(
 	}
 
 	send(prptr->prparent, pid);
-	for (i=0; i<prptr->prdesc_count; i++) {
+	temp_descriptor_count = prptr->prdesc_count;
+	for (i=0; i<temp_descriptor_count; i++) {
 		close(prptr->prdesc[i]);
 	}
-	kprintf(" %d files closed\n",prptr->prdesc_count);
+	kprintf("%d files closed which were left open at termination", (temp_descriptor_count-3));
 	freestk(prptr->prstkbase, prptr->prstklen);
 
 	switch (prptr->prstate) {
