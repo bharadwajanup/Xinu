@@ -29,7 +29,8 @@ syscall	kill(
 	send(prptr->prparent, pid);
 	temp_descriptor_count = prptr->prdesc_count;
 	for (i=0; i<temp_descriptor_count; i++) {
-		close(prptr->prdesc[i]);
+		if(prptr->prdesc[i] != -1) //Skip the ones which are closed by the process.
+			close(prptr->prdesc[i]);
 	}
 	kprintf("%d files closed which were left open at termination", (temp_descriptor_count-3));
 	freestk(prptr->prstkbase, prptr->prstklen);

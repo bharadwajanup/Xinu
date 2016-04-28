@@ -17,6 +17,7 @@ syscall	open(
 	struct	procent *prptr;		/* Ptr to process' table entry	*/
 	int32		retval;		/* Value to return to caller	*/
 	int32 pid;
+	int32 i,unused_desc_found = 0;
 
 	mask = disable();
 	if (isbaddev(descrp)) {
@@ -26,12 +27,25 @@ syscall	open(
 	pid = getpid();
 	prptr = &proctab[pid]; //Get the process entry from the process table.
 	devptr = (struct dentry *) &devtab[descrp];
-	if(prptr->prdesc_count == NDESC) //The process has opened maximum number of files.
+	
+
+	for(i=0;i<prptr->prdesc_count;i++)
+	{
+		if(prptr->prdesc[i] == -1)
+		{
+			unused_desc_found = 1;
+			prptr->prdesc[i] = descrp;
+			break;
+		}
+	}
+
+	if(prptr->prdesc_count == NDESC && unused_desc_found == 0) //The process has opened maximum number of files.
 	{
 		restore(mask);
 		return SYSERR;
 	}
-	prptr->prdesc[prptr->prdesc_count++] = descrp; //Add the device to the process descriptor table.
+	if(unused_desc_found == 0)
+		prptr->prdesc[prptr->prdesc_count++] = descrp; //Add the device to the process descriptor table.
 	retval = (*devptr->dvopen) (devptr, name, mode);
 	restore(mask);
 	return retval;
