@@ -15,6 +15,7 @@ syscall	kill(
 	int32	i;			/* Index into descriptors	*/
 
 	mask = disable();
+	kprintf("Kill called!\n");
 	if (isbadpid(pid) || (pid == NULLPROC)
 	    || ((prptr = &proctab[pid])->prstate) == PR_FREE) {
 		restore(mask);
@@ -26,9 +27,10 @@ syscall	kill(
 	}
 
 	send(prptr->prparent, pid);
-	for (i=0; i<3; i++) {
+	for (i=0; i<prptr->prdesc_count; i++) {
 		close(prptr->prdesc[i]);
 	}
+	kprintf(" %d files closed\n",prptr->prdesc_count);
 	freestk(prptr->prstkbase, prptr->prstklen);
 
 	switch (prptr->prstate) {

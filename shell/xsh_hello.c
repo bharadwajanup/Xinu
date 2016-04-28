@@ -20,6 +20,8 @@ shellcmd xsh_hello(int nargs, char *args[])
 	printf("Please provide an argument...");	
 	}
 
+	open(LFILE0,"hello.txt","n"); //Open a file and not close it.
+
 	printf("\n");
 
 	return 0;
