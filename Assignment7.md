@@ -15,9 +15,9 @@ Given data:
   * Number of files held by the disk: k
 
 Now, one index block can hold 16 block pointers. Therefore, for k files we would need ceiling of (k/16) index blocks.
-Therefore, total number of disk blocks occupied by file pointers in the disk = (k/16*7)
+Therefore, total number of disk blocks occupied by file index blocks in the disk = (k/(16*7))
 
-Each index block can have 16 data block pointers and seven such index blocks add up to one disk block. Therefore total number of disk blocks occupied by index blocks is: (summation) i=1 to i=k : (p(i)/16*7).
+Each index block can have 16 data block pointers and seven such index blocks add up to one disk block. Therefore total number of disk blocks occupied by index blocks is: (summation) i=1 to i=k : (p(i)/(16*7)).
 
  where p(i) is the number of data blocks occupied by the ith file.
 
@@ -34,6 +34,9 @@ Therefore,
 Total number of disk blocks occupied by index blocks = 
 
 (k/(16 * 7)) + (summation) i=1 to i=k (p(i)/(16 * 7)) = n - (summation) i=1 to i=k p(i)
+
+
+Credits: The solution to task 2 was discussed with Raghavendra.
 
 
 
