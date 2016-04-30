@@ -2,8 +2,8 @@
 
 ##Task 1
 * Modified process.h file to add a counter that holds the number of entries in prdesc array.
-* When a file is opened, its descriptor is pushed into prdesc and the counter is incremented.
-* When a file is closed, the counter is decremented.
+* When a file is opened, its descriptor is pushed into prdesc and the counter is incremented or if there are areas in the array which has been unused (with value -1), the new descriptor will occupy that place.
+* When a file is closed, The corresponding descriptor in the array is removed from the array and set to -1.
 * Upon process termination, all entries in prdesc are iteratively closed to close down any files that were left open.
 
 ##Task 2
@@ -36,7 +36,11 @@ Total number of disk blocks occupied by index blocks =
 (k/(16 * 7)) + (summation) i=1 to i=k (p(i)/(16 * 7)) = n - (summation) i=1 to i=k p(i)
 
 
-Credits: The solution to task 2 was discussed with Raghavendra and Chris on his AI office hours.
+##Contribution:
+The assignment was implemented as peer programming and hence both of us have contributed equally towards the assignmet.
+
+##Credits: 
+The solution to task 2 was discussed with Raghavendra and Chris on his AI office hours.
 
 
 
