@@ -22,8 +22,8 @@ shellcmd xsh_hello(int nargs, char *args[])
 
 	open(LFILE0,"hello.txt","n"); 
 	close(LFILE0);
-	open(LFILE0,"hello1.txt","n");//Open a file and not close it.
-
+	open(LFILE1,"hello1.txt","n");//Open a file and not close it.
+	open(LFILE2,"hello2.txt","n");
 	printf("\n");
 
 	return 0;
